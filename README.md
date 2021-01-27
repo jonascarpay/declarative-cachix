@@ -51,7 +51,7 @@ Example configuration:
 
     caches.cachix = [
       { name = "jmc"; sha256 = "1bk08lvxi41ppvry72y1b9fi7bb6qvsw6bn1ifzsn46s3j0idq0a"; }
-      "iohk"
+      "nix-community"
     ];
 
     caches.extraCaches = [
