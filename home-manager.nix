@@ -10,9 +10,8 @@ let
 
   cachixCaches = map (import ./fetchCachix.nix) cfg.cachix;
 
-  substituters = concatStringsSep " " (map (v: v.url) (attrValues cfg.caches));
-  publicKeys = concatStringsSep " "
-    (concatMap (v: v.keys or [ v.key ]) (attrValues cfg.caches));
+  substituters = concatStringsSep " " (map (v: v.url) cfg.caches);
+  publicKeys = concatStringsSep " " (concatMap (v: v.keys or [ v.key ]) cfg.caches);
   nixConfSource = ''
     substituters = ${substituters}
     trusted-public-keys = ${publicKeys}
@@ -30,16 +29,16 @@ in
 
         Example value:
           
-          {
-            nixos = {
+          [
+            {
               url = "https://cache.nixos.org";
               key = "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=";
-            };
-          }
+            }
+          ]
 
       '';
-      type = types.attrs;
-      default = cachixCaches // cfg.extraCaches // { nixos = nixosCache; };
+      type = with types; listOf attrs;
+      default = cachixCaches ++ cfg.extraCaches ++ [ nixosCache ];
     };
 
     extraCaches = mkOption {
@@ -51,14 +50,14 @@ in
 
         Example value:
           
-          {
-            iohk-hydra = {
+          [
+            {
               url = "https://hydra.iohk.io";
               key = "hydra.iohk.io:********************************************";
-            };
-          }
+            }
+          ]
       '';
-      type = types.attrs;
+      type = with types; listOf attrs;
       default = { };
     };
 

@@ -4,7 +4,7 @@ Add [cachix](https://cachix.org/) caches declaratively.
 
 Has two options; a system module and a home-manager module.
 
-### System module
+### System module (easiest)
 
 Import `default.nix` into your system configuration.
 This adds the top-level `cachix` option, which you can use to add cachix caches.
@@ -24,12 +24,13 @@ Example configuration:
   }
 ```
 
-### Home-manager module (not recommended)
+### Home-manager module
 
 The home-manager module is a little bit trickier.
-Home-manager does not contain a mechanism for declaratively adding caches like the system config does, so we have to write it ourselves.
-The issue is that this means that we take responsibility for generating a well-formed `.config/nix/nix.conf` file.
-If this file is malformed, it breaks home-manager itself, so you have to manually delete/fix it and fix your config.
+Home-manager does not contain a mechanism for declaratively adding caches like the system config does.
+The issue is that generating it ourselves means that we take responsibility for generating a well-formed `.config/nix/nix.conf` file.
+If this file is malformed, it can break home-manager itself, so you then have to manually delete/fix it and fix your config.
+I still use it myself without issues, but beware.
 Caveat emptor.
 
 #### Usage
@@ -41,11 +42,13 @@ There's also `caches.caches`, but you typically don't want to set this manually 
 Example configuration:
 ```nix
   {
-    imports =
-      let
-        declCachix = builtins.fetchTarball "https://github.com/jonascarpay/declarative-cachix/archive/FIXME.tar.gz";
-      in
-      [ (import "${declCachix}/home-manager.nix") ];
+    imports = [
+      (
+        let
+          declCachix = builtins.fetchTarball "https://github.com/jonascarpay/declarative-cachix/archive/FIXME.tar.gz";
+        in import "${declCachix}/home-manager.nix"
+      )
+    ];
 
     caches.cachix = [
       { name = "jmc"; sha256 = "1bk08lvxi41ppvry72y1b9fi7bb6qvsw6bn1ifzsn46s3j0idq0a"; }
