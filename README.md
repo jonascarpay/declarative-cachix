@@ -30,8 +30,7 @@ The home-manager module is a little bit trickier.
 Home-manager does not contain a mechanism for declaratively adding caches like the system config does.
 The issue is that generating it ourselves means that we take responsibility for generating a well-formed `.config/nix/nix.conf` file.
 If this file is malformed, it can break home-manager itself, so you then have to manually delete/fix it and fix your config.
-I still use it myself without issues, but beware.
-Caveat emptor.
+I still use it myself without issues, but caveat emptor.
 
 #### Usage
 
