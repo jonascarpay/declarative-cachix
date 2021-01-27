@@ -1,10 +1,9 @@
 # Declarative Cachix
 
 Add [cachix](https://cachix.org/) caches declaratively.
+You can use it either as a system module, or as a home-manager module.
 
-Has two options; a system module and a home-manager module.
-
-### System module (easiest)
+### System module
 
 Import `default.nix` into your system configuration.
 This adds the top-level `cachix` option, which you can use to add cachix caches.
@@ -26,9 +25,9 @@ Example configuration:
 
 ### Home-manager module
 
-The home-manager module is a little bit trickier.
+#### Warning
 Home-manager does not contain a mechanism for declaratively adding caches like the system config does.
-The issue is that generating it ourselves means that we take responsibility for generating a well-formed `.config/nix/nix.conf` file.
+This module adds that by generating a `.config/nix/nix.conf` file declaratively.
 If this file is malformed, it can break home-manager itself, so you then have to manually delete/fix it and fix your config.
 I still use it myself without issues, but caveat emptor.
 
