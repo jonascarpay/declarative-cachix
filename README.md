@@ -28,8 +28,9 @@ Example configuration:
 #### Warning
 Home-manager does not contain a mechanism for declaratively adding caches like the system config does.
 This module adds that by generating a `.config/nix/nix.conf` file declaratively.
+If you already have entries in that file, you need to move those to `home.file.nixConf.text` so they get included in the generated file.
 If this file is malformed, it can break home-manager itself, so you then have to manually delete/fix it and fix your config.
-I still use it myself without issues, but caveat emptor.
+I haven't had any issues myself, but caveat emptor.
 
 #### Usage
 
