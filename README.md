@@ -14,7 +14,7 @@ Example configuration:
 ```nix
   {
     imports = [
-      (import (builtins.fetchTarball "https://github.com/jonascarpay/declarative-cachix/archive/FIXME.tar.gz"))
+      (import (builtins.fetchTarball "https://github.com/jonascarpay/declarative-cachix/archive/2d37297b3aa1281193b1a3ca208c77467772cf5c.tar.gz"))
     ];
 
     cachix = [
@@ -45,7 +45,7 @@ Example configuration:
     imports = [
       (
         let
-          declCachix = builtins.fetchTarball "https://github.com/jonascarpay/declarative-cachix/archive/FIXME.tar.gz";
+          declCachix = builtins.fetchTarball "https://github.com/jonascarpay/declarative-cachix/archive/2d37297b3aa1281193b1a3ca208c77467772cf5c.tar.gz";
         in import "${declCachix}/home-manager.nix"
       )
     ];
