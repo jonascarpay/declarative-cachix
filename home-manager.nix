@@ -28,7 +28,7 @@ in
         The names are ignored.
 
         Example value:
-          
+
           [
             {
               url = "https://cache.nixos.org";
@@ -49,7 +49,7 @@ in
         default nixos cache intact.
 
         Example value:
-          
+
           [
             {
               url = "https://hydra.iohk.io";
@@ -58,7 +58,7 @@ in
           ]
       '';
       type = with types; listOf attrs;
-      default = { };
+      default = [ ];
     };
 
     cachix = mkOption {
