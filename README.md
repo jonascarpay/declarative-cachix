@@ -31,11 +31,7 @@ This module adds that by generating a `.config/nix/nix.conf` file declaratively.
 
 This has two important implications:
   1. If you already have entries in that file aside from the default nix cache, you need to move those to `home.file.nixConf.text` so they get included in the generated file.
-  2. If the file is somehow malformed, it will break home-manager itself, so you then have to manually delete/fix it and fix your config. I haven't had any issues myself, but caveat emptor. If something breaks, it should be sufficient to remove the symlink and replace it with the default contents:
-```
-substituters = https://cache.nixos.org
-trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-```
+  2. If the file is somehow malformed, it will break home-manager itself, so you then have to manually delete it and fix your config. I haven't had any issues myself, but caveat emptor.
 
 #### Usage
 
