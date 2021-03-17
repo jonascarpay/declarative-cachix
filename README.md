@@ -39,7 +39,7 @@ Import `home-manager.nix` into your home-manager configuration.
 This adds two user-facing options; `caches.extraCaches` and `caches.cachix`.
 There's also `caches.caches`, but you typically don't want to set this manually since it also adds the normal nix hydra.
 
-Note that you will need to be a trusted user.
+Note that you need to be a trusted user to be able to specify caches.
 See [this issue](https://github.com/jonascarpay/declarative-cachix/issues/2) for more information.
 
 Example configuration:
