@@ -27,7 +27,7 @@ Example configuration:
 
 #### Warning
 Home-manager does not contain a mechanism for declaratively adding caches like the system config does.
-This module adds that by generating a `.config/nix/nix.conf` file declaratively.
+This module implements that mechanism itself by generating a `.config/nix/nix.conf` file declaratively.
 
 This has two important implications:
   1. If you already have entries in that file aside from the default nix cache, you need to move those to `home.file.nixConf.text` so they get included in the generated file.
@@ -37,7 +37,6 @@ This has two important implications:
 
 Import `home-manager.nix` into your home-manager configuration.
 This adds two user-facing options; `caches.extraCaches` and `caches.cachix`.
-There's also `caches.caches`, but you typically don't want to set this manually since it also adds the normal nix hydra.
 
 Note that you need to be a trusted user to be able to specify caches.
 See [this issue](https://github.com/jonascarpay/declarative-cachix/issues/2) for more information.
