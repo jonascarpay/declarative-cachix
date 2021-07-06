@@ -9,6 +9,7 @@ in
 
   options.cachix = mkOption {
     type = with types; listOf (either str attrs);
+    default = [ ];
     description = ''
       Accepts two configuration formats; either as a string, or an attribute
       set with a specified sha (recommended).
