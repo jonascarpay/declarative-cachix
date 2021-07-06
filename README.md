@@ -65,3 +65,11 @@ Example configuration:
     ];
   }
 ```
+
+#### Experimental
+
+There is a `home-manager-experimental.nix` module that uses the `extra-substituters` and `extra-trusted-public-keys` configuration fields, instead of the normal `substituters` and `trusted-public-keys`.
+These fields compose better and have less risk of accidentally overriding other configuration, but unfortunately they are not yet available in stable nix.
+
+If you're on unstable and have enabled experimental features, and you're having issues where your caches are not properly being picked up, consider switching to this module.
+It takes the same options as the normal module.
