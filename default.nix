@@ -1,8 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, options, ... }:
 with lib;
 let
 
   cachices = map (import ./fetchCachix.nix) config.cachix;
+  urls = map (c: c.url) cachices;
+  keys = concatMap (c: c.keys) cachices;
 
 in
 {
@@ -23,9 +25,16 @@ in
     '';
   };
 
-  config = {
-    nix.binaryCaches = map (c: c.url) cachices;
-    nix.binaryCachePublicKeys = concatMap (c: c.keys) cachices;
-  };
+  config =
+    if options.nix ? settings then
+      {
+        nix.settings.binary-caches = urls;
+        nix.settings.binary-cache-public-keys = keys;
+      }
+    else
+      {
+        nix.binaryCaches = urls;
+        nix.binaryCachePublicKeys = keys;
+      };
 
 }
