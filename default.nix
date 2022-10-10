@@ -28,8 +28,8 @@ in
   config =
     if options.nix ? settings then
       {
-        nix.settings.binary-caches = urls;
-        nix.settings.binary-cache-public-keys = keys;
+        nix.settings.substituters = urls;
+        nix.settings.trusted-public-keys = keys;
       }
     else
       {
