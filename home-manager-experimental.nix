@@ -6,12 +6,14 @@ let
   caches =
     let toCachix = import ./fetchCachix.nix;
     in map toCachix cfg.cachix ++ cfg.extraCaches;
+
   substituters = concatStringsSep " " (map (v: v.url) caches);
   publicKeys = concatStringsSep " " (concatMap (v: v.keys or [ v.key ]) caches);
-  nixConfSource = ''
-    extra-substituters = ${substituters}
-    extra-trusted-public-keys = ${publicKeys}
-  '';
+
+  nixSettings = {
+    extra-substituters = substituters;
+    extra-trusted-public-keys = publicKey;
+  };
 
 in
 {
@@ -53,11 +55,7 @@ in
       default = [ ];
       type = with types; listOf (either string attrs);
     };
-
   };
 
-  config.home.file.nixConf = {
-    target = ".config/nix/nix.conf";
-    text = nixConfSource;
-  };
+  config.nix.settings = nixSettings;
 }

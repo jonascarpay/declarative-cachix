@@ -12,10 +12,11 @@ let
 
   substituters = concatStringsSep " " (map (v: v.url) cfg.caches);
   publicKeys = concatStringsSep " " (concatMap (v: v.keys or [ v.key ]) cfg.caches);
-  nixConfSource = ''
-    substituters = ${substituters}
-    trusted-public-keys = ${publicKeys}
-  '';
+
+  nixSettings = {
+    inherit substituters;
+    trusted-public-keys = publicKeys;
+  };
 
 in
 {
@@ -81,8 +82,5 @@ in
 
   };
 
-  config.home.file.nixConf = {
-    target = ".config/nix/nix.conf";
-    text = nixConfSource;
-  };
+  config.nix.settings = nixSettings;
 }
