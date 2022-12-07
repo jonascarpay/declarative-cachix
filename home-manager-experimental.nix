@@ -12,7 +12,7 @@ let
 
   nixSettings = {
     extra-substituters = substituters;
-    extra-trusted-public-keys = publicKey;
+    extra-trusted-public-keys = publicKeys;
   };
 
 in
