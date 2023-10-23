@@ -77,7 +77,7 @@ in
         ]
       '';
       default = [ ];
-      type = with types; listOf (either string attrs);
+      type = with types; listOf (either str attrs);
     };
 
   };
